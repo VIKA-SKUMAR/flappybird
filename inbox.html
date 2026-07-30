@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Bird Adventure</title>
+
+    <meta name="description" content="Play Sky Bird Adventure - Free Online Flappy Style Game">
+    <meta name="keywords" content="Flappy Bird, Bird Game, Online Game, Free Browser Game">
+    <meta name="theme-color" content="#4FC3F7">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="loading">
+    <h1>Loading...</h1>
+</div>
+
+<div id="gameContainer">
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="startScreen" class="screen">
+        <h1>🐦 Sky Bird Adventure</h1>
+
+        <p>Tap or Press Space to Fly</p>
+
+        <button id="playBtn">
+            PLAY
+        </button>
+
+    </div>
+
+    <div id="gameUI">
+
+        <div id="scoreBox">
+            Score :
+            <span id="score">
+                0
+            </span>
+        </div>
+
+        <div id="bestBox">
+            Best :
+            <span id="bestScore">
+                0
+            </span>
+        </div>
+
+        <button id="pauseBtn">
+            ⏸️
+        </button>
+
+        <button id="muteBtn">
+            🔊
+        </button>
+
+    </div>
+
+    <div id="gameOverScreen" class="screen">
+
+        <h2>Game Over</h2>
+
+        <p>
+            Your Score :
+            <span id="finalScore">
+                0
+            </span>
+        </p>
+
+        <button id="restartBtn">
+            Play Again
+        </button>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
