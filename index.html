@@ -1,84 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sky Bird Adventure</title>
-
-    <meta name="description" content="Play Sky Bird Adventure - Free Online Flappy Style Game">
-    <meta name="keywords" content="Flappy Bird, Bird Game, Online Game, Free Browser Game">
-    <meta name="theme-color" content="#4FC3F7">
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flappy Bird Style</title>
+<style>
+body{margin:0;display:flex;justify-content:center;align-items:center;height:100vh;background:#70c5ce;font-family:Arial}
+canvas{background:#87CEEB;border:2px solid #333}
+</style>
 </head>
-
 <body>
-
-<div id="loading">
-    <h1>Loading...</h1>
-</div>
-
-<div id="gameContainer">
-
-    <canvas id="gameCanvas"></canvas>
-
-    <div id="startScreen" class="screen">
-        <h1>🐦 Sky Bird Adventure</h1>
-
-        <p>Tap or Press Space to Fly</p>
-
-        <button id="playBtn">
-            PLAY
-        </button>
-
-    </div>
-
-    <div id="gameUI">
-
-        <div id="scoreBox">
-            Score :
-            <span id="score">
-                0
-            </span>
-        </div>
-
-        <div id="bestBox">
-            Best :
-            <span id="bestScore">
-                0
-            </span>
-        </div>
-
-        <button id="pauseBtn">
-            ⏸️
-        </button>
-
-        <button id="muteBtn">
-            🔊
-        </button>
-
-    </div>
-
-    <div id="gameOverScreen" class="screen">
-
-        <h2>Game Over</h2>
-
-        <p>
-            Your Score :
-            <span id="finalScore">
-                0
-            </span>
-        </p>
-
-        <button id="restartBtn">
-            Play Again
-        </button>
-
-    </div>
-
-</div>
-
-<script src="script.js"></script>
-
+<canvas id="c" width="400" height="600"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let b={x:80,y:300,v:0,r:12},pipes=[],score=0;
+function add(){let t=50+Math.random()*250;pipes.push({x:400,t:t,b:t+150})}
+setInterval(add,1800);
+onkeydown=()=>b.v=-8;ontouchstart=()=>b.v=-8;
+function loop(){
+x.clearRect(0,0,400,600);
+b.v+=0.5;b.y+=b.v;
+x.beginPath();x.arc(b.x,b.y,b.r,0,7);x.fillStyle="yellow";x.fill();
+for(let i=pipes.length-1;i>=0;i--){
+let p=pipes[i];p.x-=2;
+x.fillStyle="green";
+x.fillRect(p.x,0,60,p.t);
+x.fillRect(p.x,p.b,60,600-p.b);
+if(b.x+b.r>p.x&&b.x-b.r<p.x+60&&(b.y-b.r<p.t||b.y+b.r>p.b)){alert("Game Over! Score: "+score);location.reload();}
+if(!p.s&&p.x+60<b.x){p.s=1;score++;}
+if(p.x<-60)pipes.splice(i,1);
+}
+if(b.y>600||b.y<0){alert("Game Over! Score: "+score);location.reload();}
+x.fillStyle="#000";x.font="24px Arial";x.fillText("Score: "+score,10,30);
+requestAnimationFrame(loop);
+}
+loop();
+</script>
 </body>
 </html>
